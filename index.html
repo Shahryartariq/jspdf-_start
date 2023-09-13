@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+        integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Sherry</h1>
+    <p>This is Shehryar This is Shehryar This is Shehryar This is Shehryar This is Shehryar This is Shehryar This is
+        Shehryar This is Shehryar This is Shehryar This is Shehryar This is Shehryar</p>
+
+    <button id="generatePdfButton">Generate PDF</button>
+    <script>
+        document
+            .getElementById("generatePdfButton")
+            .addEventListener("click", certification1);
+
+        function certification1() {
+            const pText = document.querySelector('h1');
+            const longTextVariable = "This is Shehryar";
+
+            const pdf = new jsPDF("p", "in", "a4");  //8.25 x 11.75 inches
+
+            createBorder(pdf);
+            printText(pdf, 0.5, 0.4, "MAWB No.: 235 ORD 46817433");
+            printText(pdf, 4.9, 0.4, "HAWB No.: 406401870CLE");
+
+            printText(pdf, 0.7, 0.6, "Hello, World!");
+            longText(pdf, longTextVariable);
+
+
+            createCell(pdf, 0.5, 0.5);
+            createCell(pdf, 4.12, 0.5);
+
+            createCell(pdf, 0.5, 1.5);
+            createCell(pdf, 4.12, 1.5);
+
+            createCell(pdf, 0.5, 2.5);
+            createCell(pdf, 4.12, 2.5);
+
+            createCell(pdf, 0.5, 3.5);
+            createCell(pdf, 4.12, 3.5);
+
+            createCell(pdf, 0.5, 4.5);
+            createCell(pdf, 4.12, 4.5);
+
+            createCell(pdf, 0.5, 5.5);
+            createCell(pdf, 4.12, 5.5);
+
+            createCell(pdf, 0.5, 6.5);
+            createCell(pdf, 4.12, 6.5);
+
+            createCell(pdf, 0.5, 7.5);
+            createCell(pdf, 4.12, 7.5);
+
+            createCell(pdf, 0.5, 8.5);
+            createCell(pdf, 4.12, 8.5);
+
+            createCell(pdf, 0.5, 9.5);
+            createCell(pdf, 4.12, 9.5);
+
+
+            pdf.addPage();
+            createBorder(pdf);
+            createCell(pdf, 0.5, 0.5);
+            createCell(pdf, 4.12, 0.5);
+
+
+            pdf.save("test.pdf");
+        };
+
+        // Function to print text on a PDF
+        function printText(pdf, x, y, text) {
+            pdf.setFontSize(6);
+            pdf.text(x, y, text);
+        }
+
+        // Function to create a cell
+        function createCell(doc, x, y) {
+            doc.setLineWidth(1 / 72);
+            doc.rect(x, y, 3.63, 1);
+        }
+
+        // Function to creates a border
+        function createBorder(doc) {
+            doc.setDrawColor('black');
+            //  72 points in 1 inch
+            doc.setLineWidth(1 / 72);
+            // doc.line(starting-x, starting-y, ending-x, ending-y);
+            doc.line(0.5, 0.5, 0.5, 11.25);
+            doc.line(7.75, 0.5, 7.75, 11.25);
+            doc.line(0.5, 0.5, 7.75, 0.5);
+            doc.line(0.5, 11.25, 7.75, 11.25);
+
+        }
+
+        // Function to long text
+        function longText(doc, theLongText) {
+            let textlines = doc.setFont('helvetica')
+                .setFontSize(6)
+                .splitTextToSize(theLongText, 7.00);
+
+
+            let verticalOffset = 0.5;
+            doc.text(0.6, verticalOffset + 12 / 72, textlines);
+            verticalOffset += (textlines.length + 0.5) * 12 / 72;
+
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
